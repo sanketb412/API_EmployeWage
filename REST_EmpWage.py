@@ -63,6 +63,29 @@ def get_emp_ID(emp_id):
     """
     return jsonify({'Emp_Id': Emp_details[emp_id-1]})
 
+@app.route("/employee/<string:name>", methods=['POST'])
+def create_employee_details(name):
+    """
+        Description:
+            function create_employee_details creates one new entry of employee in an object
+        Parameter:
+            request is call to get the json data. new_item to ge the employee details and them append into into Emp_details
+        Return:
+            returning the Json object.
+    """
+    for emp_details in Emp_details:
+        if(emp_details['Employee_Name'] != name):
+            req_data = request.get_json()
+            new_item = {
+                'ID':req_data['ID'],
+                'Employee_Name':req_data['Employee_Name'],
+                'Employee_ID': req_data['Employee_ID'],
+                'Employee_Daily_Wage': req_data['Employee_Daily_Wage']
+            }
+            Emp_details.append(new_item)
+            return jsonify(new_item)
+        return jsonify({'messgae': "Employee Already exists "})
+
 if __name__ == '__main__':
     # calling main function to run the app while debug is to be True
     app.run(port=8000, debug=True)
