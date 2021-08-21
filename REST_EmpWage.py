@@ -51,6 +51,18 @@ def get():
     """    
     return jsonify({'Employee':Emp_details})
 
+@app.route("/employee/<int:emp_id>", methods=['GET'])
+def get_emp_ID(emp_id):
+    """
+        Description:
+            function get_emp_id call the data by refering ID
+        Parameter:
+            just to difne the object Emp_ID Parameter is define.
+        Return:
+            returning the Json object.
+    """
+    return jsonify({'Emp_Id': Emp_details[emp_id-1]})
+
 if __name__ == '__main__':
     # calling main function to run the app while debug is to be True
     app.run(port=8000, debug=True)
