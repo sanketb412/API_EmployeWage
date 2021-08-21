@@ -86,6 +86,15 @@ def create_employee_details(name):
             return jsonify(new_item)
         return jsonify({'messgae': "Employee Already exists "})
 
+@app.route("/employee/<int:emp_id>", methods = ['PUT'])
+def update_employee_details(emp_id):
+    for emp_update in Emp_details:
+        if(emp_update['ID'] == emp_id):
+            req_data = request.get_json()
+            emp_update['Employee_Name'] = req_data['Employee_Name']
+            return jsonify(emp_update)
+    return jsonify({'messgae': "Employee didnt find"})
+
 if __name__ == '__main__':
     # calling main function to run the app while debug is to be True
     app.run(port=8000, debug=True)
