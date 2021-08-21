@@ -95,6 +95,22 @@ def update_employee_details(emp_id):
             return jsonify(emp_update)
     return jsonify({'messgae': "Employee didnt find"})
 
+@app.route("/employee/<int:id>", methods=['DELETE'])
+def delete_employee(id):
+    """
+        Description:
+            function delete_employee is define as to delete the entries from the json list
+        Parameter:
+            parameter ID is define to get the entries from user and .remove function is used
+        Return:
+            returning the Json object.
+    """
+    try:
+        Emp_details.remove(Emp_details[id-1])
+        return jsonify({'result': True})
+    except:
+        return jsonify({'messgae': "Employee didnt find"})
+
 if __name__ == '__main__':
     # calling main function to run the app while debug is to be True
     app.run(port=8000, debug=True)
